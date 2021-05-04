@@ -1,0 +1,86 @@
+@import url('https://fonts.googleapis.com/css2?family=Annie+Use+Your+Telescope&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.container {
+    background-color: rgb(25,25,25);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+}
+
+h1 {
+    color: rgba(255,255,255,.75);
+    margin-bottom: 45px;
+    padding: 15px;
+    border-top: 2px solid crimson;
+    letter-spacing: 2rem;
+    text-align: center;
+    font-family: "Annie Use Your Telescope";
+}
+
+.sub-container {
+    height: 30vh;
+    padding: 55px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;  
+    border: 2px solid crimson;
+    border-top: none;
+    border-bottom: none;
+}
+
+.btn {
+    background-color: rgb(25,25,25);
+    margin: 15px;
+    padding: 15px;
+    color: rgba(255,255,255,.75);
+    border: 2px solid crimson;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Annie Use Your Telescope";
+    letter-spacing: 1rem;
+    font-size: large;
+
+    cursor: pointer;
+}
+.btn1 {
+    animation: turn 1.5s ease-in-out;
+}
+.btn:active {
+    border-color: orangered;
+}
+  
+@keyframes turn {
+    0%,
+    100% {
+      color: rgba(255,255,255,.75);
+    }
+    50% {
+      color: crimson;
+    }
+}
+
+.input {
+    background-color: rgba(255,255,255,.75);
+    width: 40vw;
+    height: 5vh;
+    margin-bottom: 15px;
+    border-radius: 5px;
+    color: rgb(25,25,25);
+    font-family: monospace;
+    font-size: large;
+
+}
+.input:focus {
+    outline: none;
+}
