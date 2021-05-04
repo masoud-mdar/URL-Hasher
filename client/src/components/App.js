@@ -4,7 +4,7 @@ import Hasher from "./Hasher"
 import Retriever from "./Retriever"
 import Swal from 'sweetalert2';
 
-const BASE_URL = "http://localhost:5000"
+const BASE_URL = "https://url-hasher.herokuapp.com"
 
 const App = () => {
     const [input, setInput] = useState("")
@@ -91,7 +91,7 @@ const App = () => {
         <div className="container">
 
             <h1>URL Hasher</h1>
-            
+
             <button className="btn" onClick={changer}>URL/Hash</button>
             
 
