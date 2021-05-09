@@ -84,3 +84,12 @@ h1 {
 .input:focus {
     outline: none;
 }
+
+.loading {
+    background-color: royalblue;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
