@@ -10,6 +10,8 @@ const App = () => {
     const [input, setInput] = useState("")
     const [urlActive, setUrlActive] = useState(true)
 
+    const [isLoading, setIsLoading] = useState(false)
+
 
 
     const handleChange = (Event) => {
@@ -17,8 +19,19 @@ const App = () => {
     }
 
     const handleSubmit = () => {
+
+        let tempArr = input.split("")
+        let pureInput = ""
+        if (tempArr[tempArr.length-1] === "/") {
+            tempArr.pop()
+        }
+        pureInput = tempArr.join("")
+
         try {
-            axios.post(`${BASE_URL}/api/shorturl/new`, {url: input}).then((response) => {
+            setIsLoading(true)
+            axios.post(`${BASE_URL}/api/shorturl/new`, {url: pureInput}).then((response) => {
+
+                setIsLoading(false)
 
                 if (response.data.hasOwnProperty("error")){
                     Swal.fire({
@@ -28,7 +41,7 @@ const App = () => {
                     })
                 } else {
         
-                    Swal.fire("Cool!", `Hashed URL: ${response.data.short_url}`, "success").then(
+                    Swal.fire("URL submitted successfully", `Hashed URL: ${response.data.short_url}`, "success").then(
                         (result) => {
                           if (result.isConfirmed || result.isDismissed) {
                           }
@@ -50,8 +63,11 @@ const App = () => {
 
     const handleRetrieve = () => {
         try {
-            const param1 = input
+            setIsLoading(true)
+            const param1 = input ? input : "123"
             axios.get(`${BASE_URL}/api/shorturl/${param1}`).then((response) => {
+
+                setIsLoading(false)
 
                 if (response.data.hasOwnProperty("error")){
                     Swal.fire({
@@ -61,7 +77,7 @@ const App = () => {
                     })
                 } else {
         
-                    Swal.fire("Cool!", `Original URL: ${response.data.url}`, "success").then(
+                    Swal.fire("Original URL successfully found", `Original URL: ${response.data.url}`, "success").then(
                         (result) => {
                           if (result.isConfirmed || result.isDismissed) {
                           }
@@ -87,36 +103,52 @@ const App = () => {
     }
 
     return(
+        <div>
 
-        <div className="container">
+            {!isLoading ? (
 
-            <h1>URL Hasher</h1>
+                    <div className="container">
 
-            <button className="btn" onClick={changer}>URL/Hash</button>
-            
+                    <h1>URL Hasher</h1>
 
-            {urlActive ? (
+                    <button className="btn" onClick={changer}>URL/Hash</button>
+                    
 
-                <Hasher
-                    data={{
-                        handleChange: handleChange,
-                        handleSubmit: handleSubmit,
-                        input: input
-                    }}
-                />
+                    {urlActive ? (
+
+                        <Hasher
+                            data={{
+                                handleChange: handleChange,
+                                handleSubmit: handleSubmit,
+                                input: input
+                            }}
+                        />
+
+                    ) : (
+
+                        <Retriever
+                            data={{
+                                handleChange: handleChange,
+                                handleRetrieve: handleRetrieve,
+                                input: input
+                            }}
+                        />
+                    )}
+
+                </div>
 
             ) : (
-
-                <Retriever
-                    data={{
-                        handleChange: handleChange,
-                        handleRetrieve: handleRetrieve,
-                        input: input
-                    }}
-                />
+                <div className="loading">
+                    <h1>Loading...</h1>
+                </div>
             )}
 
+
+
         </div>
+
+
+
 
     )
 }
